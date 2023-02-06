@@ -4,33 +4,38 @@ import java.time.LocalDate;
 
 public class YoungestEldestWorkers {
 
-    private static String type;
-    private static String name;
-    private static LocalDate birthday;
+    private String type;
+    private  String name;
+    private LocalDate birthday;
 
+    public YoungestEldestWorkers(String type, String name, LocalDate birthday) {
+        this.type = type;
+        this.name = name;
+        this.birthday = birthday;
+    }
 
-    public static String getType() {
+    public String getType() {
         return type;
     }
 
-    public static void setType(String type) {
-        YoungestEldestWorkers.type = type;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        YoungestEldestWorkers.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static LocalDate getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public static void setBirthday(LocalDate birthday) {
-        YoungestEldestWorkers.birthday = birthday;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     @Override

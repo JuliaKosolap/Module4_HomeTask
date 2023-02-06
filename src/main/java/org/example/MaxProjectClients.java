@@ -1,28 +1,28 @@
 package org.example;
 
 public class MaxProjectClients {
-    private static String name;
-    private static int project_count;
+    private String name;
+    private int project_count;
 
     public MaxProjectClients(String name, int projectCount) {
         this.name = name;
         this.project_count = projectCount;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        MaxProjectClients.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static int getProject_count() {
+    public int getProject_count() {
         return project_count;
     }
 
-    public static void setProject_count(int project_count) {
-        MaxProjectClients.project_count = project_count;
+    public void setProject_count(int project_count) {
+        this.project_count = project_count;
     }
     @Override
     public String toString() {

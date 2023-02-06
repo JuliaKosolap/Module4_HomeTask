@@ -1,15 +1,15 @@
 package org.example;
 
 public class ProjectPrice {
-    private static String name;
-    private static int price;
+    private String name;
+    private int price;
 
     public ProjectPrice(String name, int price) {
         this.name = name;
         this.price = price;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
@@ -17,7 +17,7 @@ public class ProjectPrice {
         this.name = name;
     }
 
-    public static int getPrice() {
+    public int getPrice() {
         return price;
     }
 

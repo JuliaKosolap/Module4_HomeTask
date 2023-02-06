@@ -15,16 +15,16 @@ public class DatabaseQueryService {
         Database.CreateDBConnection();
         Connection connection = Database.getConnection();
         Statement statement = connection.createStatement();
-//        ArrayList maxSalaryList = findMaxSalary(statement);
-//        System.out.println(maxSalaryList);
-//        ArrayList longestProjectsList = findLongestProject(statement);
-//        System.out.println(longestProjectsList);
-//        ArrayList maxProjectClientsList = findMaxProjectClients(statement);
-//        System.out.println(maxProjectClientsList);
-//        ArrayList youngestEldestWorkersList = findYoungestEldestWorkers(statement);
-//        System.out.println(youngestEldestWorkersList);
+        ArrayList maxSalaryList = findMaxSalary(statement);
+        System.out.println(maxSalaryList);
+        ArrayList longestProjectsList = findLongestProject(statement);
+        System.out.println(longestProjectsList);
+        ArrayList maxProjectClientsList = findMaxProjectClients(statement);
+        System.out.println(maxProjectClientsList);
+        ArrayList youngestEldestWorkersList = findYoungestEldestWorkers(statement);
+        System.out.println(youngestEldestWorkersList);
         ArrayList projectPricesList = getProjectPrice(statement);
-        //System.out.println(projectPricesList);
+        System.out.println(projectPricesList);
         statement.close();
         connection.close();
     }
@@ -59,8 +59,7 @@ public class DatabaseQueryService {
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             int projectCount = resultSet.getInt("project_count");
-            MaxProjectClients maxProjectClients = new MaxProjectClients(name, projectCount);
-            list.add(maxProjectClients);
+            list.add(new MaxProjectClients(name, projectCount));
         }
         return list;
     }
@@ -70,12 +69,11 @@ public class DatabaseQueryService {
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
         ArrayList<Object> list = new ArrayList<>();
         while (resultSet.next()) {
-            YoungestEldestWorkers youngestEldestWorkers = new YoungestEldestWorkers();
-            youngestEldestWorkers.setType(resultSet.getString("type"));
-            youngestEldestWorkers.setName(resultSet.getString("name"));
+            String type = resultSet.getString("type");
+            String name = resultSet.getString("name");
             String rawDate = resultSet.getString("birthday");
-            youngestEldestWorkers.setBirthday(LocalDate.parse(rawDate));
-            list.add(youngestEldestWorkers);
+            LocalDate birthday = LocalDate.parse(rawDate);
+            list.add(new YoungestEldestWorkers(type, name, birthday));
         }
         return list;
     }
@@ -88,7 +86,6 @@ public class DatabaseQueryService {
             int price = resultSet.getInt("price");
             list.add(new ProjectPrice(name, price));
         }
-        System.out.println(list);
         return list;
     }
 

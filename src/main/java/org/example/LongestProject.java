@@ -1,8 +1,8 @@
 package org.example;
 
 public class LongestProject {
-    private static String name;
-    private static int month_count;
+    private String name;
+    private int month_count;
 
     public LongestProject(String name, int monthCount) {
         this.name = name;

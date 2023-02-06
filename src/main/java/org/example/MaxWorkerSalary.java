@@ -2,8 +2,8 @@ package org.example;
 
 public class MaxWorkerSalary {
 
-    private static String name;
-    private static int salary;
+    private String name;
+    private int salary;
 
     public MaxWorkerSalary(String name, int salary) {
         this.name = name;
