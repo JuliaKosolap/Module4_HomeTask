@@ -1,4 +1,4 @@
-package org.example;
+package org.example.common;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabasePopulateService {
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void fillTablesWithData() throws SQLException, IOException {
         Database.CreateDBConnection();
         Connection connection = Database.getConnection();
         Statement statement = connection.createStatement();

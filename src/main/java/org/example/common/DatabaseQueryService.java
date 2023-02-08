@@ -1,4 +1,6 @@
-package org.example;
+package org.example.common;
+
+import org.example.entities.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,63 +13,66 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DatabaseQueryService {
-    public static void main(String[] args) throws SQLException, IOException {
+
+    public static ArrayList<MaxWorkerSalary> findMaxSalary() throws IOException, SQLException {
         Database.CreateDBConnection();
         Connection connection = Database.getConnection();
         Statement statement = connection.createStatement();
-        ArrayList maxSalaryList = findMaxSalary(statement);
-        System.out.println(maxSalaryList);
-        ArrayList longestProjectsList = findLongestProject(statement);
-        System.out.println(longestProjectsList);
-        ArrayList maxProjectClientsList = findMaxProjectClients(statement);
-        System.out.println(maxProjectClientsList);
-        ArrayList youngestEldestWorkersList = findYoungestEldestWorkers(statement);
-        System.out.println(youngestEldestWorkersList);
-        ArrayList projectPricesList = getProjectPrice(statement);
-        System.out.println(projectPricesList);
-        statement.close();
-        connection.close();
-    }
-    public static ArrayList findMaxSalary(Statement statement) throws IOException, SQLException {
         String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_max_salary_worker.sql")));
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
-        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<MaxWorkerSalary> list = new ArrayList<>();
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             int salary = resultSet.getInt("salary");
             list.add(new MaxWorkerSalary(name, salary));
-        }
 
+        }
+        statement.close();
+        connection.close();
         return list;
+
     }
-    public static ArrayList findLongestProject(Statement statement) throws IOException, SQLException {
+    public static ArrayList<LongestProject> findLongestProject() throws IOException, SQLException {
+        Database.CreateDBConnection();
+        Connection connection = Database.getConnection();
+        Statement statement = connection.createStatement();
         String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_longest_project.sql")));
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
-        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<LongestProject> list = new ArrayList<>();
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             int monthCount = resultSet.getInt("month_count");
             list.add(new LongestProject(name, monthCount));
         }
+        statement.close();
+        connection.close();
         return list;
     }
 
-    public static ArrayList findMaxProjectClients(Statement statement) throws IOException, SQLException {
+    public static ArrayList<MaxProjectClients> findMaxProjectClients() throws IOException, SQLException {
+        Database.CreateDBConnection();
+        Connection connection = Database.getConnection();
+        Statement statement = connection.createStatement();
         String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_max_projects_client.sql")));
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
-        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<MaxProjectClients> list = new ArrayList<>();
         while (resultSet.next()) {
             String name = resultSet.getString("name");
             int projectCount = resultSet.getInt("project_count");
             list.add(new MaxProjectClients(name, projectCount));
         }
+        statement.close();
+        connection.close();
         return list;
     }
 
-    public static ArrayList findYoungestEldestWorkers(Statement statement) throws IOException, SQLException {
+    public static ArrayList<YoungestEldestWorkers> findYoungestEldestWorkers() throws IOException, SQLException {
+        Database.CreateDBConnection();
+        Connection connection = Database.getConnection();
+        Statement statement = connection.createStatement();
         String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_youngest_eldest_workers.sql")));
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
-        ArrayList<Object> list = new ArrayList<>();
+        ArrayList<YoungestEldestWorkers> list = new ArrayList<>();
         while (resultSet.next()) {
             String type = resultSet.getString("type");
             String name = resultSet.getString("name");
@@ -75,9 +80,14 @@ public class DatabaseQueryService {
             LocalDate birthday = LocalDate.parse(rawDate);
             list.add(new YoungestEldestWorkers(type, name, birthday));
         }
+        statement.close();
+        connection.close();
         return list;
     }
-    public static ArrayList<ProjectPrice> getProjectPrice(Statement statement) throws IOException, SQLException {
+    public static ArrayList<ProjectPrice> getProjectPrice() throws IOException, SQLException {
+        Database.CreateDBConnection();
+        Connection connection = Database.getConnection();
+        Statement statement = connection.createStatement();
         ArrayList<ProjectPrice> list = new ArrayList<ProjectPrice>();
         String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/print_project_prices.sql")));
         ResultSet resultSet = statement.executeQuery(sqlFromFile);
@@ -86,6 +96,8 @@ public class DatabaseQueryService {
             int price = resultSet.getInt("price");
             list.add(new ProjectPrice(name, price));
         }
+        statement.close();
+        connection.close();
         return list;
     }
 

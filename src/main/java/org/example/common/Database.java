@@ -1,4 +1,4 @@
-package org.example;
+package org.example.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,10 +14,6 @@ public class Database {
     public static void CreateDBConnection() throws SQLException {
         connection = DriverManager.getConnection(dbUrl, userName, password);
     }
-    public static Statement createStatement() throws SQLException {
-        return connection.createStatement();
-    }
-
     public static Connection getConnection() {
         return connection;
     }
