@@ -8,7 +8,6 @@ import java.sql.*;
 public class DatabaseInitService {
     public static void createTables() {
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/drop_db.sql")));

@@ -15,7 +15,6 @@ public class DatabaseQueryService {
     public static ArrayList<MaxWorkerSalary> findMaxSalary() {
         ArrayList<MaxWorkerSalary> list = null;
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_max_salary_worker.sql")));
@@ -38,7 +37,6 @@ public class DatabaseQueryService {
     public static ArrayList<LongestProject> findLongestProject() {
         ArrayList<LongestProject> list = null;
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_longest_project.sql")));
@@ -60,7 +58,6 @@ public class DatabaseQueryService {
     public static ArrayList<MaxProjectClients> findMaxProjectClients() {
         ArrayList<MaxProjectClients> list = null;
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_max_projects_client.sql")));
@@ -83,7 +80,6 @@ public class DatabaseQueryService {
     public static ArrayList<YoungestEldestWorkers> findYoungestEldestWorkers() {
         ArrayList<YoungestEldestWorkers> list = null;
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/find_youngest_eldest_workers.sql")));
@@ -107,7 +103,6 @@ public class DatabaseQueryService {
     public static ArrayList<ProjectPrice> getProjectPrice()  {
         ArrayList<ProjectPrice> list = null;
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             list = new ArrayList<>();

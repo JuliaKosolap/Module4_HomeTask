@@ -10,7 +10,6 @@ import java.sql.Statement;
 public class DatabasePopulateService {
     public static void fillTablesWithData() {
         try {
-            Database.CreateDBConnection();
             Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             String sqlFromFile = String.join("\n", Files.readAllLines(Paths.get("src/main/java/sql/populate_db.sql")));
